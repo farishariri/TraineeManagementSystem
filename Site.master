@@ -1,0 +1,145 @@
+﻿s<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/add_new.css" rel="stylesheet" />
+    <link href="/css/dashboard.css" rel="stylesheet" type="text/css" />
+    <link href="/Datatables/stylesheets/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,600;1,200;1,400;1,600&display=swap"
+    rel="stylesheet">
+
+    
+    
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">   
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a style="color:white;" class="navbar-brand" runat="server" href="~/Admin_Pages/Admin.aspx">Admin page</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a style="color:white" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trainees <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                <li><a href="../Admin_Pages/Manage.aspx">Manage</a></li>
+                                <li><a href="../Admin_Pages/Add_New_Trainee.aspx">Add new</a></li>
+                                <li><a href="../Admin_Pages/Attendance.aspx">Trainee attendance</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav" >
+                            <li class="dropdown">
+                                <a style="color:white;"  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admins <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                <li><a href="../Admin_Pages/New_Admin">Add new</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                   
+
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                
+                                <div> <img src="/img/sec.png" alt="Logo" class="Logo bg-info" style="border-radius:3px; padding-left:3px; padding-right:3px;"/> </div>
+                                
+                                <asp:Label style="color:white;" runat="server" Text="" id="navName"></asp:Label>   
+                            
+                            </ul>
+                                
+
+                                
+                           
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %>!</a></li>
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        <div style="position:absolute; bottom:0; right:0px; left:0;" >
+            <footer class="page-footer font-small blue">
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2022 Copyright:
+                <a href="Admin/Admin.aspx"> Saudi Electric Company</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+        </div>
+        </div>
+    </form>
+    <script src="../Scripts/script.js"></script>
+    <script src="../Datatables/js/jquery.dataTables.min.js"></script>
+
+    <%--<script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $('#manage_table').DataTable({
+                lengthMenu: [[10, 15, 20, 25], [10, 15, 20, 25]]
+            });
+            $('#attendance_table').DataTable({
+                lengthMenu: [[10, 15, 20, 25], [10, 15, 20, 25]]
+            });
+            $('#admin_table').DataTable({
+                lengthMenu: [[10, 15, 20, 25], [10, 15, 20, 25]]
+            });
+            $('#more_info_table').DataTable({
+                lengthMenu: [[10, 15, 20, 25], [10, 15, 20, 25]]
+            });
+        });
+
+    </script>--%>
+</body>
+</html>
